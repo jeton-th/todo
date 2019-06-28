@@ -1,11 +1,12 @@
 class Project {
-  constructor(name, todo) {
+  constructor(name) {
     this.name = name;
+    this.store = [];
   }
 
-  // addTodo(todo) {
-  //   this.todos.push(todo);
-  // }
+  addTodo(todo) {
+    this.store.push(todo);
+  }
 }
 
 export { Project as default };
