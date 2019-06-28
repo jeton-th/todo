@@ -45,13 +45,14 @@ function populateProjects(){
   }
 }
 
-function render(element) {
+function render(element, repopulateElement) {
   element.innerHTML = '';
+  repopulateElement();
 }
 
+const select = document.querySelector('.projects');
 const newTodoButton = document.querySelector('.add-todo');
 newTodoButton.addEventListener('click', () => {
-  const select = document.querySelector('.projects');
   const projectName = select.options[select.selectedIndex].value;
   const title = document.querySelector('.title').value;
   const description = document.querySelector('.description').value;
@@ -66,7 +67,7 @@ const newProjectField = document.querySelector('.new-project');
 const newProjectButton = document.querySelector('.add-project');
 newProjectButton.addEventListener('click', () => {
   addProject(newProjectField.value);
-  render(select);
+  render(select, populateProjects);
 });
 
 populateProjects()
