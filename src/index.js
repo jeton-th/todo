@@ -35,7 +35,7 @@ function populateProjects(){
   const projects = getAllProjects();
   const select = document.querySelector('.projects');
   
-  for (var key in projects) {
+  for (let key in projects) {
     if (projects.hasOwnProperty(key)) {
       const project = document.createElement('option');
       project.innerHTML = key;
@@ -67,6 +67,7 @@ const newProjectField = document.querySelector('.new-project');
 const newProjectButton = document.querySelector('.add-project');
 newProjectButton.addEventListener('click', () => {
   addProject(newProjectField.value);
+  select.options[-1];
   render(select, populateProjects);
 });
 
