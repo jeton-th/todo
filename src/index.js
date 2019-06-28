@@ -12,8 +12,6 @@ function getAllProjects() {
   return projects;
 }
 
-getAllProjects();
-
 function getProject(name) {
   return JSON.parse(localStorage.getItem(name));
 }
@@ -27,26 +25,53 @@ function editProject(project) {
   localStorage.setItem(project.name, JSON.stringify(project));
 }
 
-function addTodo(todo, projectName = 'My todos') {
+function addTodo(todo, projectName) {
   const project = getProject(projectName);
   project.store.push(todo);
   editProject(project);
 }
 
-const todo = new Todo('title', 'description', 'dueDate', 'priority')
-addTodo(todo);
+function populateProjects(){
+  const projects = getAllProjects();
+  const select = document.querySelector('.projects');
+  
+  for (var key in projects) {
+    if (projects.hasOwnProperty(key)) {
+      const project = document.createElement('option');
+      project.innerHTML = key;
+      project.value = key;
+      select.appendChild(project);
+    }
+  }
+}
 
-const todo2 = new Todo('title', 'description', 'dueDate', 'priority')
-addTodo(todo2);
+function render(element) {
+  element.innerHTML = '';
+}
+
+const newTodoButton = document.querySelector('.add-todo');
+newTodoButton.addEventListener('click', () => {
+  const select = document.querySelector('.projects');
+  const projectName = select.options[select.selectedIndex].value;
+  const title = document.querySelector('.title').value;
+  const description = document.querySelector('.description').value;
+  const dueDate = document.querySelector('.due-date').value;
+  const priority = document.querySelector('.priority').value;
+
+  const todo = new Todo(title, description, dueDate, priority);
+  addTodo(todo, projectName);
+});
+
+const newProjectField = document.querySelector('.new-project');
+const newProjectButton = document.querySelector('.add-project');
+newProjectButton.addEventListener('click', () => {
+  addProject(newProjectField.value);
+  render(select);
+});
+
+populateProjects()
 
 
-
-
-// const newProjectField = document.querySelector('.new-project');
-// const newProjectButton = document.querySelector('.add-project');
-// newProjectButton.addEventListener('click', () => {
-//   newProject(newProjectField.value);
-// });
 
 
 

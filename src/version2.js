@@ -26,34 +26,7 @@ newProjectButton.addEventListener('click', () => {
   //   newProject(newProjectField.value);
 });
 
-const newTodoButton = document.querySelector('.add-todo');
 
-newTodoButton.addEventListener('click', () => {
-  const select = document.querySelector('#project-options');
-  const title = document.querySelector('.title').value;
-  const description = document.querySelector('.description').value;
-  const dueDate = document.querySelector('.dueDate').value;
-  const priority = document.querySelector('.priority').value;
-  const selectedProject = select.options[select.selectedIndex].value;
-
-  //   const selectedStorage = JSON.parse(localStorage.getItem(selectedProject));
-
-  const todo = newTodo(title, description, dueDate, priority);
-
-  const a = getProject(selectedProject);
-
-  if (a === null) {
-    a = newProject(selectedProject);
-  }
-
-  function addTodo(todo) {
-    a.store.push(todo);
-  }
-
-  addTodo(todo);
-
-  localStorage.setItem(a.name, JSON.stringify(a));
-});
 
 function getProject(name) {
   return JSON.parse(localStorage.getItem(name));
