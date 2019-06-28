@@ -2,26 +2,56 @@
 import Project from './project';
 import Todo from './todo';
 
-function getProjects() {
+function getAllProjects() {
   const projects = {...localStorage};
 
   if (Object.keys(projects).length === 0 && projects.constructor === Object) {
-    newProject('My todos');    
+    addProject('My todos');    
   }
 
   return projects;
 }
 
-function newProject(name) {
-  const p = new Project(name);
-  localStorage.setItem(p.name, JSON.stringify(p));
+getAllProjects();
+
+function getProject(name) {
+  return JSON.parse(localStorage.getItem(name));
 }
 
-const newProjectField = document.querySelector('.new-project');
-const newProjectButton = document.querySelector('.add-project');
-newProjectButton.addEventListener('click', () => {
-  newProject(newProjectField.value);
-});
+function addProject(name) {
+  const project = new Project(name);
+  localStorage.setItem(project.name, JSON.stringify(project));
+}
+
+function editProject(project) {
+  localStorage.setItem(project.name, JSON.stringify(project));
+}
+
+function addTodo(todo, projectName = 'My todos') {
+  const project = getProject(projectName);
+  project.store.push(todo);
+  editProject(project);
+}
+
+const todo = new Todo('title', 'description', 'dueDate', 'priority')
+addTodo(todo);
+
+const todo2 = new Todo('title', 'description', 'dueDate', 'priority')
+addTodo(todo2);
+
+
+
+
+// const newProjectField = document.querySelector('.new-project');
+// const newProjectButton = document.querySelector('.add-project');
+// newProjectButton.addEventListener('click', () => {
+//   newProject(newProjectField.value);
+// });
+
+
+
+
+// console.log(getProject('My todos'))
 
 // const todo1 = new Todo('Make lunch', 'Cook pasta', new Date(), 1);
 // const project1 = new Project('My todos', todo1);
@@ -46,24 +76,6 @@ newProjectButton.addEventListener('click', () => {
 // console.log(a)
 
 // const defaultProject = new Project('My todos');
-
-// function newTodo(
-//   title,
-//   description,
-//   dueDate,
-//   priority,
-//   project = defaultProject
-// ) {
-//   if (project !== defaultProject) {
-//     project = newProject(project);
-//   }
-
-//   const todo1 = new Todo(title, description, dueDate, priority);
-//   project.addTodo(todo1);
-//   return project;
-// }
-
-
 
 // get element with id addTodo
 // add event listener to it
