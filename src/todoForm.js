@@ -1,4 +1,5 @@
 import { Todo, addTodo } from './todo';
+import { render, showTodos, populateTodos } from './render';
 
 const todoform = () => {
   const content = document.querySelector('#content');
@@ -34,17 +35,19 @@ const todoform = () => {
   form.appendChild(newTodoButton);
   content.appendChild(form);
 
-  
   newTodoButton.addEventListener('click', () => {
     const todo = new Todo(
       title.value,
       description.value,
       dueDate.value,
-      priority.value,
-      );
+      priority.value
+    );
 
-      const selectedProject = document.querySelector('.projects').value;
-      addTodo(todo, selectedProject);
+    const selectedProject = document.querySelector('.projects').value;
+    addTodo(todo, selectedProject);
+
+    const todos = document.querySelector('.todos');
+    render(todos, showTodos());
   });
 };
 
