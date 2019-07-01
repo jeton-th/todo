@@ -1,3 +1,5 @@
+import { getProject, editProject } from './project';
+
 class Todo {
   constructor(title, description, dueDate, priority) {
     this.title = title;
@@ -7,4 +9,10 @@ class Todo {
   }
 }
 
-export { Todo as default };
+function addTodo(todo, projectName) {
+  const project = getProject(projectName);
+  project.store.push(todo);
+  editProject(project);
+}
+
+export { Todo as default, addTodo };
