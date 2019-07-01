@@ -38,16 +38,25 @@ function showTodos() {
     let i = 0;
     for (let key in list) {
       const button = document.createElement('button');
+      button.id = 'accordionExample';
       button.classList.add('btn', 'btn-link');
       button.setAttribute('type', 'button');
-      button.setAttribute('data-toggle', `#collapseOne${i}`);
+      button.setAttribute('data-toggle', `#collapse${i}`);
       button.setAttribute('data-target', 'collapse');
       button.setAttribute('aria-expanded', 'true');
-      button.setAttribute('aria-controls', `collapseOne${i}`);
+      button.setAttribute('aria-controls', `collapse${i}`);
       button.innerHTML = list[key].title;
+
+      const detail = document.createElement('div');
+      detail.id = `collapse${i}`;
+      detail.classList.add('collapse','show');
+      detail.setAttribute('aria-labelledby', `heading${i}`);
+      button.setAttribute('data-parent', 'accordionExample');
+      detail.innerHTML = 'something'
 
       //add element for desc, priority and date
       accordion.appendChild(button);
+      accordion.appendChild(detail);
     }
   }
 }
