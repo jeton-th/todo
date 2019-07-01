@@ -13,10 +13,6 @@ function getProject(name) {
   return JSON.parse(localStorage.getItem(name));
 }
 
-function addProject(name) {
-  const project = new Project(name);
-  localStorage.setItem(project.name, JSON.stringify(project));
-}
 
 function editProject(project) {
   localStorage.setItem(project.name, JSON.stringify(project));
@@ -28,24 +24,7 @@ function addTodo(todo, projectName) {
   editProject(project);
 }
 
-function populateProjects(){
-  const projects = getAllProjects();
-  const select = document.querySelector('.projects');
-  
-  for (let key in projects) {
-    if (projects.hasOwnProperty(key)) {
-      const project = document.createElement('option');
-      project.innerHTML = key;
-      project.value = key;
-      select.appendChild(project);
-    }
-  }
-}
 
-function render(element, repopulateElement) {
-  element.innerHTML = '';
-  repopulateElement();
-}
 
 const select = document.querySelector('.projects');
 const newTodoButton = document.querySelector('.add-todo');

@@ -1,4 +1,8 @@
-const projectForm = (projects) => {
+import { render } from './render';
+import { addProject, getAllProjects } from './project';
+
+const projectForm = () => {
+  const projects = getAllProjects();
   const content = document.querySelector('#content');
   const form = document.createElement('div');
   form.classList.add('project-form');
@@ -23,11 +27,29 @@ const projectForm = (projects) => {
     }
   }
 
+  newProjectButton.addEventListener('click', () => {
+    addProject(newProjectField.value);
+    render(select, () => {
+      const projects = getAllProjects();
+      const select = document.querySelector('.projects');
+
+      for (let key in projects) {
+        if (projects.hasOwnProperty(key)) {
+          const project = document.createElement('option');
+          project.innerHTML = key;
+          project.value = key;
+          select.appendChild(project);
+        }
+      }
+    });
+  });
 
   form.appendChild(select);
   form.appendChild(newProjectField);
   form.appendChild(newProjectButton);
   content.appendChild(form);
+
+  return select.value;
 };
 
 export { projectForm as default };
