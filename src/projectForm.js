@@ -48,8 +48,6 @@ const projectForm = () => {
   form.appendChild(newProjectField);
   form.appendChild(newProjectButton);
   content.appendChild(form);
-
-  return select.value;
 };
 
 export { projectForm as default };

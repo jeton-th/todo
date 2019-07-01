@@ -1,6 +1,6 @@
 import { Todo, addTodo } from './todo';
 
-const todoform = (selectedProject) => {
+const todoform = () => {
   const content = document.querySelector('#content');
   const form = document.createElement('div');
   form.classList.add('todo-form');
@@ -34,16 +34,17 @@ const todoform = (selectedProject) => {
   form.appendChild(newTodoButton);
   content.appendChild(form);
 
+  
   newTodoButton.addEventListener('click', () => {
     const todo = new Todo(
       title.value,
       description.value,
       dueDate.value,
       priority.value,
-    );
-    addTodo(todo, selectedProject);
+      );
 
-
+      const selectedProject = document.querySelector('.projects').value;
+      addTodo(todo, selectedProject);
   });
 };
 
