@@ -15,4 +15,4 @@ function addTodo(todo, projectName) {
   editProject(project);
 }
 
-export { Todo as default, addTodo };
+export { Todo, addTodo };

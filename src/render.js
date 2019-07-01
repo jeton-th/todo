@@ -1,9 +1,19 @@
+import { getAllProjects } from './project';
 
 function render(element, repopulateElement) {
-    element.innerHTML = '';
-    repopulateElement();
-  }
+  element.innerHTML = '';
+  repopulateElement();
+}
 
-  export {
-      render
-  }
+function showTodos() {
+  // const projects = getAllProjects();
+
+  // for (key in projects) {
+  //   console.log(key)
+  // }
+}
+
+export {
+  render,
+  showTodos,
+};

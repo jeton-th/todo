@@ -9,7 +9,7 @@ const todoform = (selectedProject) => {
   newTodoButton.setAttribute('type', 'button');
   newTodoButton.setAttribute('value', 'Add todo');
   newTodoButton.classList.add('.add-todo');
-  
+
   const title = document.createElement('input');
   title.setAttribute('placeholder', 'Title');
   title.setAttribute('type', 'text');
@@ -39,14 +39,12 @@ const todoform = (selectedProject) => {
       title.value,
       description.value,
       dueDate.value,
-      priority.value
+      priority.value,
     );
-
-
     addTodo(todo, selectedProject);
+
+
   });
-
-
 };
 
 export { todoform as default };
