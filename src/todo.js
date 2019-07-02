@@ -25,4 +25,10 @@ function removeTodo(todoTitle, projectName) {
   newStore.splice(index, 1);
   localStorage.setItem(projectName, JSON.stringify(project))
 }
+
+function editTod(todoTitle, projectName) {
+  
+}
+
+
 export { Todo, addTodo, removeTodo };

@@ -14,8 +14,6 @@ function render(element, repopulateElement) {
 function showTodos() {
   const projects = getAllProjects();
 
-
-
   todos.classList.add('todos');
   content.appendChild(todos);
 
@@ -49,7 +47,7 @@ function showTodos() {
       detail.classList.add('collapse');
       detail.setAttribute('aria-labelledby', `heading${j}${i}`);
       button.setAttribute('data-parent', '#accordionExample');
-      
+
       const description = document.createElement('p');
       description.innerHTML = list[key].description;
       detail.appendChild(description);
@@ -62,6 +60,40 @@ function showTodos() {
       priority.innerHTML = list[key].priority;
       detail.appendChild(priority);
 
+      const edit = document.createElement('button');
+      edit.innerHTML = 'Edit';
+      detail.appendChild(edit);
+
+      edit.addEventListener('click', () => {
+        const title = document.createElement('input');
+        title.setAttribute('placeholder', 'Title');
+        title.setAttribute('type', 'text');
+        title.classList.add('.title');
+        title.value = list[key].title
+
+        const description = document.createElement('textarea');
+        description.setAttribute('placeholder', 'Description');
+        description.classList.add('.description');
+        description.value = list[key].description
+
+        const dueDate = document.createElement('input');
+        dueDate.setAttribute('type', 'date');
+        dueDate.classList.add('.due-date');
+        dueDate.value = list[key].dueDate
+
+
+        const priority = document.createElement('input');
+        priority.setAttribute('type', 'number');
+        priority.classList.add('.priority');
+        priority.value = list[key].priority
+
+        detail.appendChild(title)
+        detail.appendChild(description)
+        detail.appendChild(dueDate)
+        detail.appendChild(priority)
+        // editTodo(list[key].title, projectName);
+        // render(todos, showTodos);
+      });
 
       const remove = document.createElement('button');
       remove.innerHTML = 'Delete';
@@ -69,7 +101,7 @@ function showTodos() {
 
       remove.addEventListener('click', () => {
         removeTodo(list[key].title, projectName);
-        render(todos, showTodos)
+        render(todos, showTodos);
       });
 
       //add element for desc, priority and date
