@@ -15,4 +15,15 @@ function addTodo(todo, projectName) {
   editProject(project);
 }
 
-export { Todo, addTodo };
+function removeTodo(todoTitle, project) {
+  // const todoTitle = project.store.find(e => e.title === todoTitle);
+  const newStore = JSON.parse(project).store;
+  const index = newStore.indexOf(todoTitle);
+  newStore.splice(index, 1);
+  // localStorage.setItem(project.name, store);
+  console.log(JSON.parse(project).store);
+  JSON.parse(project).store = newStore;
+  // localStorage.setItem(project.name, JSON.stringify(project))
+  // JSON.parse(project).
+}
+export { Todo, addTodo, removeTodo };
