@@ -47,7 +47,7 @@ const todoform = () => {
     addTodo(todo, selectedProject);
 
     const todos = document.querySelector('.todos');
-    render(todos, showTodos());
+    render(todos, showTodos);
   });
 };
 

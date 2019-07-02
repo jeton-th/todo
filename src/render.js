@@ -1,17 +1,21 @@
 import { getAllProjects } from './project';
 import { removeTodo } from './todo';
 
+const content = document.querySelector('#content');
+const todos = document.createElement('div');
+
 function render(element, repopulateElement) {
-  element.innerHTML = '';
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
   repopulateElement();
 }
 
 function showTodos() {
   const projects = getAllProjects();
 
-  const content = document.querySelector('#content');
 
-  const todos = document.createElement('div');
+
   todos.classList.add('todos');
   content.appendChild(todos);
 
@@ -64,7 +68,8 @@ function showTodos() {
       detail.appendChild(remove);
 
       remove.addEventListener('click', () => {
-        removeTodo(list[key].title, projects[projectName])
+        removeTodo(list[key].title, projectName);
+        render(todos, showTodos)
       });
 
       //add element for desc, priority and date
