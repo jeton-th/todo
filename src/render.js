@@ -1,5 +1,5 @@
 import { getAllProjects } from './project';
-import { removeTodo } from './todo';
+import { removeTodo, Todo, addTodo, updateTodo } from './todo';
 
 const content = document.querySelector('#content');
 const todos = document.createElement('div');
@@ -69,28 +69,44 @@ function showTodos() {
         title.setAttribute('placeholder', 'Title');
         title.setAttribute('type', 'text');
         title.classList.add('.title');
-        title.value = list[key].title
+        title.value = list[key].title;
 
         const description = document.createElement('textarea');
         description.setAttribute('placeholder', 'Description');
         description.classList.add('.description');
-        description.value = list[key].description
+        description.value = list[key].description;
 
         const dueDate = document.createElement('input');
         dueDate.setAttribute('type', 'date');
         dueDate.classList.add('.due-date');
-        dueDate.value = list[key].dueDate
-
+        dueDate.value = list[key].dueDate;
 
         const priority = document.createElement('input');
         priority.setAttribute('type', 'number');
         priority.classList.add('.priority');
-        priority.value = list[key].priority
+        priority.value = list[key].priority;
 
-        detail.appendChild(title)
-        detail.appendChild(description)
-        detail.appendChild(dueDate)
-        detail.appendChild(priority)
+        const save = document.createElement('button');
+        save.innerHTML = 'Save';
+        detail.appendChild(save);
+
+        save.addEventListener('click', () => {
+          const oldTitle = list[key].title;
+
+          list[key].title = title.value;
+          list[key].description = description.value;
+          list[key].dueDate = dueDate.value;
+          list[key].priority = priority.value;
+
+          updateTodo(list[key], projectName, oldTitle);
+          render(todos, showTodos);
+        });
+
+        detail.appendChild(title);
+        detail.appendChild(description);
+        detail.appendChild(dueDate);
+        detail.appendChild(priority);
+        detail.appendChild(save);
         // editTodo(list[key].title, projectName);
         // render(todos, showTodos);
       });

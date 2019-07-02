@@ -1,10 +1,12 @@
 import { getProject, editProject } from './project';
+import { format } from 'date-fns'
+
 
 class Todo {
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate;
+    this.dueDate = format(dueDate);
     this.priority = priority;
   }
 }
@@ -20,15 +22,25 @@ function removeTodo(todoTitle, projectName) {
   const newStore = project.store;
   let index = 0;
   newStore.forEach((e, i) => {
-    if(todoTitle === e.title) index = i;
+    if (todoTitle === e.title) index = i;
   });
   newStore.splice(index, 1);
-  localStorage.setItem(projectName, JSON.stringify(project))
+  localStorage.setItem(projectName, JSON.stringify(project));
 }
 
-function editTod(todoTitle, projectName) {
-  
+function updateTodo(todo, projectName, oldTitle) {
+  const project = getProject(projectName);
+
+  const newStore = project.store;
+
+  let index = 0;
+  newStore.forEach((e, i) => {
+    if (oldTitle === e.title) index = i;
+  });
+
+  newStore[index] = todo;
+
+  localStorage.setItem(projectName, JSON.stringify(project));
 }
 
-
-export { Todo, addTodo, removeTodo };
+export { Todo, addTodo, removeTodo, updateTodo };
