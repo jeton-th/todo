@@ -2,7 +2,7 @@ import { Todo, addTodo } from './todo';
 import { render, showTodos, populateTodos } from './render';
 
 const todoform = () => {
-  const content = document.querySelector('#content');
+
   const form = document.createElement('div');
   form.classList.add('todo-form');
 

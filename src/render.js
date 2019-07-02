@@ -1,7 +1,7 @@
 import { getAllProjects } from './project';
 import { removeTodo, Todo, addTodo, updateTodo } from './todo';
 
-const content = document.querySelector('#content');
+
 const todos = document.createElement('div');
 
 function render(element, repopulateElement) {

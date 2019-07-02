@@ -1,6 +1,4 @@
 import { getProject, editProject } from './project';
-import { format } from 'date-fns'
-
 
 class Todo {
   constructor(title, description, dueDate, priority) {

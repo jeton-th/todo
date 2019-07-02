@@ -1,7 +1,7 @@
 import { render } from './render';
 import { addProject, getAllProjects } from './project';
 
-const content = document.querySelector('#content');
+
 const form = document.createElement('div');
 content.appendChild(form);
 
