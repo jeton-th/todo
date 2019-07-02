@@ -1,6 +1,5 @@
 import Todo from './todo';
 
-
 const display = () => {
     function populateProjects(projects) {
         // const projects = getAllProjects();
