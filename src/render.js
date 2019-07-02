@@ -64,7 +64,7 @@ function showTodos() {
       edit.innerHTML = 'Edit';
       detail.appendChild(edit);
 
-      editTodo(edit, detail, list[key], i, j);
+      editTodo(projectName, edit, detail, list[key], i, j);
 
       const remove = document.createElement('button');
       remove.innerHTML = 'Delete';
@@ -84,7 +84,7 @@ function showTodos() {
   }
 }
 
-function editTodo(edit, detail, todo, i, j) {
+function editTodo(projectName, edit, detail, todo, i, j) {
   const editForm = document.createElement('div');
   editForm.classList.add('edit-form', 'hidden');
   detail.appendChild(editForm)
