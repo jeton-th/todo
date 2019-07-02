@@ -64,52 +64,7 @@ function showTodos() {
       edit.innerHTML = 'Edit';
       detail.appendChild(edit);
 
-      edit.addEventListener('click', () => {
-        const title = document.createElement('input');
-        title.setAttribute('placeholder', 'Title');
-        title.setAttribute('type', 'text');
-        title.classList.add('.title');
-        title.value = list[key].title;
-
-        const description = document.createElement('textarea');
-        description.setAttribute('placeholder', 'Description');
-        description.classList.add('.description');
-        description.value = list[key].description;
-
-        const dueDate = document.createElement('input');
-        dueDate.setAttribute('type', 'date');
-        dueDate.classList.add('.due-date');
-        dueDate.value = list[key].dueDate;
-
-        const priority = document.createElement('input');
-        priority.setAttribute('type', 'number');
-        priority.classList.add('.priority');
-        priority.value = list[key].priority;
-
-        const save = document.createElement('button');
-        save.innerHTML = 'Save';
-        detail.appendChild(save);
-
-        save.addEventListener('click', () => {
-          const oldTitle = list[key].title;
-
-          list[key].title = title.value;
-          list[key].description = description.value;
-          list[key].dueDate = dueDate.value;
-          list[key].priority = priority.value;
-
-          updateTodo(list[key], projectName, oldTitle);
-          render(todos, showTodos);
-        });
-
-        detail.appendChild(title);
-        detail.appendChild(description);
-        detail.appendChild(dueDate);
-        detail.appendChild(priority);
-        detail.appendChild(save);
-        // editTodo(list[key].title, projectName);
-        // render(todos, showTodos);
-      });
+      editTodo(edit, detail, list[key], i, j);
 
       const remove = document.createElement('button');
       remove.innerHTML = 'Delete';
@@ -127,6 +82,57 @@ function showTodos() {
     }
     j += 1;
   }
+}
+
+function editTodo(edit, detail, todo, i, j) {
+  const editForm = document.createElement('div');
+  editForm.classList.add('edit-form', 'hidden');
+  detail.appendChild(editForm)
+
+  const editTitle = document.createElement('input');
+  editTitle.setAttribute('placeholder', 'Title');
+  editTitle.setAttribute('type', 'text');
+  editTitle.classList.add('.title');
+  editTitle.value = todo.title;
+
+  const editDescription = document.createElement('textarea');
+  editDescription.setAttribute('placeholder', 'Description');
+  editDescription.value = todo.description;
+
+  const editDate = document.createElement('input');
+  editDate.setAttribute('type', 'date');
+  editDate.value = todo.dueDate;
+
+  const editPriority = document.createElement('input');
+  editPriority.setAttribute('type', 'number');
+  editPriority.value = todo.priority;
+
+  const save = document.createElement('button');
+  save.innerHTML = 'Save';
+  editForm.appendChild(save);
+
+  save.addEventListener('click', () => {
+    const oldTitle = todo.title;
+
+    todo.title = editTitle.value;
+    todo.description = editDescription.value;
+    todo.dueDate = editDate.value;
+    todo.priority = editPriority.value;
+
+    updateTodo(todo, projectName, oldTitle);
+    render(todos, showTodos);
+  });
+
+  editForm.appendChild(editTitle);
+  editForm.appendChild(editDescription);
+  editForm.appendChild(editDate);
+  editForm.appendChild(editPriority);
+  editForm.appendChild(save);
+
+  edit.addEventListener('click', () => {
+    editForm.classList.toggle('hidden');
+    edit.innerHTML = (edit.innerHTML === 'Edit') ? 'Cancel' : 'Edit'
+  });
 }
 
 export { render, showTodos };
