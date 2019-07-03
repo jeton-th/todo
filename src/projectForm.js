@@ -8,6 +8,9 @@ content.appendChild(form);
 const projectForm = () => {
   const projects = getAllProjects();
 
+  const h3 = document.createElement('h3')
+  h3.innerHTML = 'Project'
+
   const select = document.createElement('select');
   select.classList.add('projects');
 
@@ -34,6 +37,7 @@ const projectForm = () => {
     render(form, projectForm);
   });
 
+  form.appendChild(h3);
   form.appendChild(select);
   form.appendChild(newProjectField);
   form.appendChild(newProjectButton);

@@ -11,8 +11,8 @@
 
 .todos {
   float: right;
-  width: 68%;
-  margin-top: -140px;
+  width: 65%;
+  margin-top: -180px;
 }
 
 .project-form input,
@@ -21,4 +21,12 @@
 .todo-form textarea {
   width: 100%;
   margin: 10px 0 ;
+}
+
+textarea {
+  resize: none;
+}
+
+#content{
+  padding-top:30px;
 }
