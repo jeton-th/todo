@@ -1,14 +1,13 @@
 import { render } from './render';
 import { addProject, getAllProjects } from './project';
 
-
 const form = document.createElement('div');
+form.classList.add('project-form');
 content.appendChild(form);
 
 const projectForm = () => {
   const projects = getAllProjects();
 
-  form.classList.add('project-form');
   const select = document.createElement('select');
   select.classList.add('projects');
 

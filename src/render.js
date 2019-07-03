@@ -6,7 +6,6 @@ import {
   removeTodo, updateTodo,
 } from './todo';
 
-
 const todos = document.createElement('div');
 
 function render(element, repopulateElement) {
@@ -14,6 +13,57 @@ function render(element, repopulateElement) {
     element.removeChild(element.firstChild);
   }
   repopulateElement();
+}
+
+function editTodo(projectName, edit, detail, todo) {
+  const editForm = document.createElement('div');
+  editForm.classList.add('edit-form', 'hidden');
+  detail.appendChild(editForm);
+
+  const editTitle = document.createElement('input');
+  editTitle.setAttribute('placeholder', 'Title');
+  editTitle.setAttribute('type', 'text');
+  editTitle.classList.add('.title');
+  editTitle.value = todo.title;
+
+  const editDescription = document.createElement('textarea');
+  editDescription.setAttribute('placeholder', 'Description');
+  editDescription.value = todo.description;
+
+  const editDate = document.createElement('input');
+  editDate.setAttribute('type', 'date');
+  editDate.value = todo.dueDate;
+
+  const editPriority = document.createElement('input');
+  editPriority.setAttribute('type', 'number');
+  editPriority.value = todo.priority;
+
+  const save = document.createElement('button');
+  save.innerHTML = 'Save';
+  editForm.appendChild(save);
+
+  save.addEventListener('click', () => {
+    const oldTitle = todo.title;
+
+    todo.title = editTitle.value;
+    todo.description = editDescription.value;
+    todo.dueDate = editDate.value;
+    todo.priority = editPriority.value;
+
+    updateTodo(todo, projectName, oldTitle);
+    render(todos, showTodos);
+  });
+
+  editForm.appendChild(editTitle);
+  editForm.appendChild(editDescription);
+  editForm.appendChild(editDate);
+  editForm.appendChild(editPriority);
+  editForm.appendChild(save);
+
+  edit.addEventListener('click', () => {
+    editForm.classList.toggle('hidden');
+    edit.innerHTML = (edit.innerHTML === 'Edit') ? 'Cancel' : 'Edit';
+  });
 }
 
 function showTodos() {
@@ -69,7 +119,7 @@ function showTodos() {
       edit.innerHTML = 'Edit';
       detail.appendChild(edit);
 
-      editTodo(projectName, edit, detail, list[key], i, j);
+      editTodo(projectName, edit, detail, list[key]);
 
       const remove = document.createElement('button');
       remove.innerHTML = 'Delete';
@@ -87,57 +137,6 @@ function showTodos() {
     }
     j += 1;
   }
-}
-
-function editTodo(projectName, edit, detail, todo) {
-  const editForm = document.createElement('div');
-  editForm.classList.add('edit-form', 'hidden');
-  detail.appendChild(editForm);
-
-  const editTitle = document.createElement('input');
-  editTitle.setAttribute('placeholder', 'Title');
-  editTitle.setAttribute('type', 'text');
-  editTitle.classList.add('.title');
-  editTitle.value = todo.title;
-
-  const editDescription = document.createElement('textarea');
-  editDescription.setAttribute('placeholder', 'Description');
-  editDescription.value = todo.description;
-
-  const editDate = document.createElement('input');
-  editDate.setAttribute('type', 'date');
-  editDate.value = todo.dueDate;
-
-  const editPriority = document.createElement('input');
-  editPriority.setAttribute('type', 'number');
-  editPriority.value = todo.priority;
-
-  const save = document.createElement('button');
-  save.innerHTML = 'Save';
-  editForm.appendChild(save);
-
-  save.addEventListener('click', () => {
-    const oldTitle = todo.title;
-
-    todo.title = editTitle.value;
-    todo.description = editDescription.value;
-    todo.dueDate = editDate.value;
-    todo.priority = editPriority.value;
-
-    updateTodo(todo, projectName, oldTitle);
-    render(todos, showTodos);
-  });
-
-  editForm.appendChild(editTitle);
-  editForm.appendChild(editDescription);
-  editForm.appendChild(editDate);
-  editForm.appendChild(editPriority);
-  editForm.appendChild(save);
-
-  edit.addEventListener('click', () => {
-    editForm.classList.toggle('hidden');
-    edit.innerHTML = (edit.innerHTML === 'Edit') ? 'Cancel' : 'Edit';
-  });
 }
 
 export { render, showTodos };
