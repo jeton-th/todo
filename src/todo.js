@@ -4,7 +4,7 @@ class Todo {
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate  ;
+    this.dueDate = dueDate;
     this.priority = priority;
   }
 }
@@ -41,4 +41,9 @@ function updateTodo(todo, projectName, oldTitle) {
   localStorage.setItem(projectName, JSON.stringify(project));
 }
 
-export { Todo, addTodo, removeTodo, updateTodo };
+export {
+  Todo,
+  addTodo,
+  removeTodo,
+  updateTodo,
+};

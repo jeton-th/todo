@@ -5,8 +5,13 @@ class Project {
   }
 }
 
+function addProject(name) {
+  const project = new Project(name);
+  localStorage.setItem(project.name, JSON.stringify(project));
+}
+
 function getAllProjects() {
-  const projects = { ...localStorage };
+  const projects = [...localStorage];
 
   if (Object.keys(projects).length === 0 && projects.constructor === Object) {
     addProject('My todos');
@@ -19,11 +24,6 @@ function getProject(name) {
   return JSON.parse(localStorage.getItem(name));
 }
 
-function addProject(name) {
-  const project = new Project(name);
-  localStorage.setItem(project.name, JSON.stringify(project));
-}
-
 function editProject(project) {
   localStorage.setItem(project.name, JSON.stringify(project));
 }
@@ -33,5 +33,5 @@ export {
   getAllProjects,
   getProject,
   addProject,
-  editProject
+  editProject,
 };
