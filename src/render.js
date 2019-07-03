@@ -1,5 +1,10 @@
+/* eslint no-param-reassign: ["error",
+{ "props": true, "ignorePropertyModificationsFor": ["todo", "edit"] }] */
+
 import { getAllProjects } from './project';
-import { removeTodo, Todo, addTodo, updateTodo } from './todo';
+import {
+  removeTodo, updateTodo,
+} from './todo';
 
 
 const todos = document.createElement('div');
@@ -18,16 +23,16 @@ function showTodos() {
   content.appendChild(todos);
 
   let j = 0;
-  for (let projectName in projects) {
-    let project = document.createElement('h3');
+  for (const projectName in projects) {
+    const project = document.createElement('h3');
     project.classList.add('project-name');
     project.innerHTML = projectName;
     todos.appendChild(project);
 
-    let list = JSON.parse(projects[projectName]).store;
+    const list = JSON.parse(projects[projectName]).store;
 
     let i = 0;
-    for (let key in list) {
+    for (const key in list) {
       const accordion = document.createElement('div');
       accordion.id = 'accordionExample';
       accordion.classList.add('accordion');
@@ -75,7 +80,7 @@ function showTodos() {
         render(todos, showTodos);
       });
 
-      //add element for desc, priority and date
+      // add element for desc, priority and date
       accordion.appendChild(button);
       accordion.appendChild(detail);
       i += 1;
@@ -84,10 +89,10 @@ function showTodos() {
   }
 }
 
-function editTodo(projectName, edit, detail, todo, i, j) {
+function editTodo(projectName, edit, detail, todo) {
   const editForm = document.createElement('div');
   editForm.classList.add('edit-form', 'hidden');
-  detail.appendChild(editForm)
+  detail.appendChild(editForm);
 
   const editTitle = document.createElement('input');
   editTitle.setAttribute('placeholder', 'Title');
@@ -131,7 +136,7 @@ function editTodo(projectName, edit, detail, todo, i, j) {
 
   edit.addEventListener('click', () => {
     editForm.classList.toggle('hidden');
-    edit.innerHTML = (edit.innerHTML === 'Edit') ? 'Cancel' : 'Edit'
+    edit.innerHTML = (edit.innerHTML === 'Edit') ? 'Cancel' : 'Edit';
   });
 }
 

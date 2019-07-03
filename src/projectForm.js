@@ -21,20 +21,20 @@ const projectForm = () => {
   newProjectButton.setAttribute('type', 'button');
   newProjectButton.value = 'Add project';
 
-  let optionsArray = [];
-  for (let key in projects) {
+  const optionsArray = [];
+  for (const key in projects) {
     if (Object.prototype.hasOwnProperty.call(projects, key)) {
-      optionsArray.push(key)
+      optionsArray.push(key);
     }
   }
 
-  optionsArray.sort()
+  optionsArray.sort();
   optionsArray.forEach((title) => {
     const project = document.createElement('option');
     project.innerHTML = title;
     project.value = title;
     select.appendChild(project);
-  })  
+  });
 
   newProjectButton.addEventListener('click', () => {
     addProject(newProjectField.value);
@@ -44,7 +44,6 @@ const projectForm = () => {
   form.appendChild(select);
   form.appendChild(newProjectField);
   form.appendChild(newProjectButton);
-
 };
 
 export { projectForm as default };

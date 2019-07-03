@@ -11,7 +11,7 @@ function addProject(name) {
 }
 
 function getAllProjects() {
-  const projects = [...localStorage];
+  const projects = {...localStorage};
 
   if (Object.keys(projects).length === 0 && projects.constructor === Object) {
     addProject('My todos');
