@@ -73,16 +73,16 @@ function showTodos() {
   content.appendChild(todos);
 
   let j = 0;
-  for (const projectName in projects) {
+  const projectNames = Object.keys(projects);
+  projectNames.forEach((projectName) => {
     const project = document.createElement('h3');
     project.classList.add('project-name');
     project.innerHTML = projectName;
     todos.appendChild(project);
 
-    const list = JSON.parse(projects[projectName]).store;
-
     let i = 0;
-    for (const key in list) {
+    const list = JSON.parse(projects[projectName]).store;
+    list.forEach((todo) => {
       const accordion = document.createElement('div');
       accordion.id = 'accordionExample';
       accordion.classList.add('accordion');
@@ -95,7 +95,7 @@ function showTodos() {
       button.setAttribute('data-target', `#collapse${j}${i}`);
       button.setAttribute('aria-expanded', 'true');
       button.setAttribute('aria-controls', `collapse${j}${i}`);
-      button.innerHTML = list[key].title;
+      button.innerHTML = todo.title;
 
       const detail = document.createElement('div');
       detail.id = `collapse${j}${i}`;
@@ -104,29 +104,29 @@ function showTodos() {
       button.setAttribute('data-parent', '#accordionExample');
 
       const description = document.createElement('p');
-      description.innerHTML = list[key].description;
+      description.innerHTML = todo.description;
       detail.appendChild(description);
 
       const date = document.createElement('p');
-      date.innerHTML = list[key].dueDate;
+      date.innerHTML = todo.dueDate;
       detail.appendChild(date);
 
       const priority = document.createElement('p');
-      priority.innerHTML = list[key].priority;
+      priority.innerHTML = todo.priority;
       detail.appendChild(priority);
 
       const edit = document.createElement('button');
       edit.innerHTML = 'Edit';
       detail.appendChild(edit);
 
-      editTodo(projectName, edit, detail, list[key]);
+      editTodo(projectName, edit, detail, todo);
 
       const remove = document.createElement('button');
       remove.innerHTML = 'Delete';
       detail.appendChild(remove);
 
       remove.addEventListener('click', () => {
-        removeTodo(list[key].title, projectName);
+        removeTodo(todo.title, projectName);
         render(todos, showTodos);
       });
 
@@ -134,9 +134,9 @@ function showTodos() {
       accordion.appendChild(button);
       accordion.appendChild(detail);
       i += 1;
-    }
+    });
     j += 1;
-  }
+  });
 }
 
 export { render, showTodos };

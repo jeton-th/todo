@@ -20,13 +20,7 @@ const projectForm = () => {
   newProjectButton.setAttribute('type', 'button');
   newProjectButton.value = 'Add project';
 
-  const optionsArray = [];
-  for (const key in projects) {
-    if (Object.prototype.hasOwnProperty.call(projects, key)) {
-      optionsArray.push(key);
-    }
-  }
-
+  const optionsArray = Object.keys(projects);
   optionsArray.sort();
   optionsArray.forEach((title) => {
     const project = document.createElement('option');
